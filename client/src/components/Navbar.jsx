@@ -72,8 +72,7 @@ const Navbar = () => {
                             className='p-1.5 pl-3 hover:bg-primary/10 cursor-pointer'>
                             Logout
                         </li>
-                        <li
-                            
+                        <li 
                             className='p-1.5 pl-3 hover:bg-primary/10 cursor-pointer'>
                             {user.name}
                         </li>
