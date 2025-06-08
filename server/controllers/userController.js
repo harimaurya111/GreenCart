@@ -126,7 +126,7 @@ export const isAuth = async (req, res) => {
 
 export const logout = async (req,res) =>{
     try {
-        res.setCookie('token',"",{
+        res.cookie('token',"",{
             httpOnly: true,
             maxAge: 0,
             secure: process.env.NODE_ENV === "production",
