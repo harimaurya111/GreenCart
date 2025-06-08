@@ -21,7 +21,7 @@ app.post('/stripe',express.raw({type:'application/json'}),stripeWebhooks)
 
 
 //Allow multiple origins
-const allowedOrigin = ["http://localhost:5173"]
+const allowedOrigin = ["http://localhost:5173","https://green-cart-frontend-jade.vercel.app"]
 
 
 //Middleware configuration
