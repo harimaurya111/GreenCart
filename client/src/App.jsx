@@ -23,7 +23,14 @@ import PageNotFound from './components/PageNotFound.jsx'
 
 const App = () => {
   const issellerPath = useLocation().pathname.includes("seller")
-  const {showUserLogin,isseller}=useAppContext()
+  const {showUserLogin,isseller,loading}=useAppContext();
+
+  if(loading){
+    return <Loader/>
+  }
+
+
+
   return (
     <div className='text-default min-h-screen text-gray-700 bg-white'>
       {issellerPath ? null : <Navbar />}

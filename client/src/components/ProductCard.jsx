@@ -5,8 +5,6 @@ import { useAppContext } from "../context/AppContext";
 
 const ProductCard = ({ product }) => {
     const { currency, addToCart, updateCartItem, removeFromCart, cartItems,navigate } = useAppContext()
-    
-    
     return product && (
         <div onClick={()=>{navigate(`/products/${product.category?.toLowerCase()}/${product._id}`);
         scrollTo(0, 0)}} className="border border-gray-500/20 rounded-md md:px-4 px-3 py-2 bg-primary/7  w-full shadow-md">
