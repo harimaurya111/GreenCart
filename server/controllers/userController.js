@@ -31,14 +31,14 @@ export const register = async (req, res) => {
       httpOnly: true,
       secure: process.env.NODE_ENV === "production",
       sameSite: process.env.NODE_ENV === "production" ? "none" : "strict", // CSRF Protection
-      path: "/",
+      path:"/",
       maxAge: 7 * 24 * 60 * 60 * 1000,
     });
 
     return res.json({
       success: true,
       message: "User Registerd successfully",
-      user: { email: user.email, name: user.name, _id: user._id },
+      user: { email: user.email, name: user.name , _id: user._id},
     });
   } catch (error) {
     console.log(error.message);
@@ -84,20 +84,16 @@ export const login = async (req, res) => {
 
     res.cookie("token", token, {
       httpOnly: true,
-      secure: process.env.NODE_ENV === "production",
-      sameSite: process.env.NODE_ENV === "production" ? "none" : "strict",
+      secure: true,
+      sameSite: "strict",
       maxAge: 7 * 24 * 60 * 60 * 1000,
+      path:"/"
     });
 
     return res.json({
       success: true,
       message: "User Login successfully",
-      user: {
-        email: user.email,
-        name: user.name,
-        _id: user._id,
-        cartItems: user.cartItems,
-      },
+      user: { email: user.email, name: user.name, _id:user._id ,cartItems: user.cartItems},
     });
   } catch (error) {
     console.log(error.message);
@@ -126,25 +122,27 @@ export const isAuth = async (req, res) => {
   }
 };
 
+
 // Logout : api/user/logout
 
-export const logout = async (req, res) => {
-  try {
-    return res.clearCookie("token", {
-        httpOnly: true,
-        secure: process.env.NODE_ENV === "production",
-        sameSite: process.env.NODE_ENV === "production" ? "none" : "strict",
-        path: "/",
-      })
-      .json({
-        success: true,
-        message: "Loggout Succesfully",
-      });
-  } catch (error) {
-    console.log(error.message);
-    res.json({
-      success: false,
-      message: error.message,
-    });
-  }
-};
+export const logout = async (req,res) =>{
+    try {
+          return res.cookie('token',"",{
+            httpOnly: true,
+            maxAge: 0,
+            secure: true,
+            sameSite: "strict" ,
+            path:"/",
+
+          }).json({
+            success:true,
+            message:"Loggout Succesfully"
+          })
+    } catch (error) {
+        console.log(error.message)
+        res.json({
+                success:false,
+                message:error.message
+        })
+    }
+}
