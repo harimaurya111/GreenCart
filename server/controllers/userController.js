@@ -125,24 +125,25 @@ export const isAuth = async (req, res) => {
 
 // Logout : api/user/logout
 
-export const logout = async (req,res) =>{
-    try {
-          return res.cookie('token',"",{
-            httpOnly: true,
-            maxAge: 0,
-            secure: true,
-            sameSite: "none" ,
-            path:"/",
+export const logout = async (req, res) => {
+  try {
+    res.clearCookie("token", {
+      httpOnly: true,
+      secure: true,
+      sameSite: "none",
+      path: "/"
+    });
 
-          }).json({
-            success:true,
-            message:"Loggout Succesfully"
-          })
-    } catch (error) {
-        console.log(error.message)
-        res.json({
-                success:false,
-                message:error.message
-        })
-    }
-}
+    return res.status(200).json({
+      success: true,
+      message: "Logout Successfully"
+    });
+  } catch (error) {
+    console.log(error.message);
+    return res.status(500).json({
+      success: false,
+      message: error.message
+    });
+  }
+};
+
