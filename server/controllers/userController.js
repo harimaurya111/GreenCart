@@ -32,13 +32,12 @@ export const register = async (req, res) => {
       secure: process.env.NODE_ENV === "production",
       sameSite: process.env.NODE_ENV === "production" ? "none" : "strict", // CSRF Protection
       maxAge: 7 * 24 * 60 * 60 * 1000,
-      
     });
 
     return res.json({
       success: true,
       message: "User Registerd successfully",
-      user: { email: user.email, name: user.name },
+      user: { email: user.email, name: user.name , _id: user._id},
     });
   } catch (error) {
     console.log(error.message);
@@ -92,7 +91,7 @@ export const login = async (req, res) => {
     return res.json({
       success: true,
       message: "User Login successfully",
-      user: { email: user.email, name: user.name, id:user._id },
+      user: { email: user.email, name: user.name, _id:user._id },
     });
   } catch (error) {
     console.log(error.message);
