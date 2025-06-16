@@ -4,7 +4,7 @@ import { useState } from "react";
 import { useAppContext } from "../context/AppContext";
 
 const Login = () => {
-    const { setShowUserLogin,setUser,navigate,axios,toast } = useAppContext()
+    const { setShowUserLogin,setUser,navigate,axios,toast ,setCartItems} = useAppContext()
 
     const [state, setState] = useState("login");
     const [name, setName] = useState("");
@@ -19,6 +19,8 @@ const Login = () => {
                 navigate("/")
                 toast.success(data.message)
                 setUser(data.user)
+                        setCartItems({ ...data.user.cartItems });
+
                 setShowUserLogin(false)
 
             }else{
